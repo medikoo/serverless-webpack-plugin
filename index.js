@@ -78,7 +78,8 @@ module.exports = function getPlugin(S) {
           const handlerEntryPath = `./${handlerFileName}`;
 
           // override entry and output
-          webpackConfig.context = path.dirname(func.getFilePath());
+          webpackConfig.context = path.dirname(func.getFilePath())
+            .replace(/\//g, path.sep); // Ensure windows support
           if (Array.isArray(webpackConfig.entry)) {
             webpackConfig.entry.push(handlerEntryPath);
           } else {
